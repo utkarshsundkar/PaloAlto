@@ -6,15 +6,17 @@ Edit this file to match your environment before running.
 # ─────────────────────────────────────────────
 #  Palo Alto Device Settings
 # ─────────────────────────────────────────────
-PALOALTO_HOST     = "192.168.9.1"       # Firewall management IP
+PALOALTO_HOST     = "192.168.147.139"   # Firewall management IP
 PALOALTO_PORT     = 22                  # SSH port (default 22)
-PALOALTO_USERNAME = "read"              # SSH username
-PALOALTO_PASSWORD = "Tsdgpl@123"        # SSH password
+PALOALTO_USERNAME = "admin"             # SSH username
+PALOALTO_PASSWORD = "Admin@1234"        # SSH password
 
 # ─────────────────────────────────────────────
 #  vsys  (leave "vsys1" for most deployments)
 # ─────────────────────────────────────────────
 VSYS = "vsys1"
+# PA-VM / single-vsys: CLI is "set address ...", not "set vsys vsys1 address ..."
+USE_VSYS_PREFIX = False
 
 # ─────────────────────────────────────────────
 #  Commit behaviour
@@ -35,6 +37,7 @@ SHEET_SERVICE_OBJECTS  = "Service_Objects"
 SHEET_SECURITY_ZONES   = "Security_Zones"
 SHEET_NAT_POLICIES     = "NAT_Policies"
 SHEET_SECURITY_POLICIES = "Security_Policies"
+SHEET_HA_CONFIG         = "HA_Configuration"
 
 # ─────────────────────────────────────────────
 #  Logging

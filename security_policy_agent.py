@@ -6,6 +6,7 @@ Can read security policies from the predefined Python policy list or from polici
 
 import argparse
 import logging
+import re
 import sys
 import time
 from typing import Sequence
@@ -17,10 +18,17 @@ from rich.table import Table
 
 import config
 from cli_builder import CLIBuilder
-from excel_reader import ExcelReader, PolicyWorkbook, SecurityPolicy
+from excel_reader import (
+    AddressObject,
+    ExcelReader,
+    PolicyWorkbook,
+    SecurityPolicy,
+    SecurityZone,
+    ServiceObject,
+)
 from excel_writer import ExcelWriter
 from policy_pusher import _has_error
-from security_policies_list import export_policies_to_excel, get_security_policies
+from security_policies_list import export_policies_to_excel, get_security_policies, map_service_to_panos
 from ssh_client import PaloAltoSSHClient
 
 # ─────────────────────────────────────────────────────────────
@@ -48,6 +56,18 @@ logging.basicConfig(
 )
 log = logging.getLogger("paloalto.security_agent")
 console = Console(highlight=False)
+
+_IP_RE = re.compile(r"^\d{1,3}(?:\.\d{1,3}){3}(?:/\d{1,2})?$")
+
+
+def _members_list(value: str) -> list[str]:
+    return [v.strip() for v in (value or "").split(",") if v.strip()]
+
+
+def _addr_object_name(value: str) -> str:
+    if "/" in value:
+        return "N-" + value.replace("/", "-")
+    return "H-" + value
 
 
 class SecurityPolicyAgent:
@@ -107,6 +127,69 @@ class SecurityPolicyAgent:
 
         console.print(tbl)
 
+    def _send_cfg_tolerant(self, cmd: str) -> None:
+        """Send a configure command; ignore already-exists style errors."""
+        out = self.ssh.send_cfg_cmd(cmd)
+        err, msg = _has_error(out)
+        if not err:
+            return
+        lowered = msg.lower()
+        if any(tok in lowered for tok in ("already", "exists", "duplicate", "is used")):
+            log.info(f"    skip existing: {msg}")
+            return
+        log.warning(f"    prerequisite warning: {msg}  ({cmd})")
+
+    def _ensure_prerequisites(self, policies: list[SecurityPolicy]) -> None:
+        """Create zones, services, and tags referenced by the rules."""
+        console.print("[bold]Creating prerequisite objects (zones, services, tags) ...[/]")
+        seen_zones: set[str] = set()
+        seen_svcs: set[str] = set()
+        seen_tags: set[str] = set()
+        vsys_base = f"set vsys {config.VSYS}" if getattr(config, "USE_VSYS_PREFIX", False) else "set"
+
+        for pol in policies:
+            # Map Cisco/vHEADER services to PAN-OS application + service if needed
+            if pol.application.lower() in ("any", "") and pol.service.lower() not in ("any", "application-default"):
+                app_mapped, svc_mapped = map_service_to_panos(pol.service)
+                if app_mapped != "any":
+                    pol.application = app_mapped
+                    pol.service = svc_mapped
+
+            for zone in _members_list(pol.srczone) + _members_list(pol.dstzone):
+                if zone.lower() == "any" or zone in seen_zones:
+                    continue
+                seen_zones.add(zone)
+                z = SecurityZone(row_index=0, name=zone, mode="layer3", interfaces="")
+                cmds = self.builder.security_zone(z)
+                if not cmds:
+                    cmds = [f'{vsys_base} zone "{zone}" network layer3 [ ]']
+                for cmd in cmds:
+                    self._send_cfg_tolerant(cmd)
+
+            for svc in _members_list(pol.service):
+                if svc.lower() in ("any", "application-default"):
+                    continue
+                m_tcp = re.fullmatch(r"TCP-(\d+)", svc, re.IGNORECASE)
+                if m_tcp and svc not in seen_svcs:
+                    seen_svcs.add(svc)
+                    obj = ServiceObject(row_index=0, name=svc, protocol="tcp", dst_port=m_tcp.group(1))
+                    for cmd in self.builder.service_object(obj):
+                        self._send_cfg_tolerant(cmd)
+                m_udp = re.fullmatch(r"UDP-(\d+)", svc, re.IGNORECASE)
+                if m_udp and svc not in seen_svcs:
+                    seen_svcs.add(svc)
+                    obj = ServiceObject(row_index=0, name=svc, protocol="udp", dst_port=m_udp.group(1))
+                    for cmd in self.builder.service_object(obj):
+                        self._send_cfg_tolerant(cmd)
+
+            for tag in _members_list(pol.tag):
+                if tag in seen_tags:
+                    continue
+                seen_tags.add(tag)
+                self._send_cfg_tolerant(f'{vsys_base} tag "{tag}"')
+
+        console.print("   [green]Prerequisites applied.[/]\n")
+
     def push_policies(self, policies: list[SecurityPolicy]) -> list[SecurityPolicy]:
         """Push security policy rules via PAN-OS SSH CLI."""
         total = len(policies)
@@ -116,14 +199,24 @@ class SecurityPolicyAgent:
 
         console.print(f"\n[bold]Pushing {total} Security Policies ...[/]\n")
 
+        vsys_base = f"set vsys {config.VSYS}" if getattr(config, "USE_VSYS_PREFIX", False) else "set"
+        del_base = f"delete vsys {config.VSYS}" if getattr(config, "USE_VSYS_PREFIX", False) else "delete"
+
         if not self.dry_run:
             if not self.ssh:
                 raise RuntimeError("SSH Client required for live push.")
             self.ssh.configure()
+            self._ensure_prerequisites(policies)
 
         try:
             for idx, pol in enumerate(policies, start=1):
                 name = pol.name
+                if not self.dry_run:
+                    # Reset source and destination so old references are not retained
+                    self.ssh.send_cfg_cmd(f'{vsys_base} rulebase security rules "{name}"')
+                    self.ssh.send_cfg_cmd(f'{del_base} rulebase security rules "{name}" source')
+                    self.ssh.send_cfg_cmd(f'{del_base} rulebase security rules "{name}" destination')
+
                 cmds = self.builder.security_policy(pol)
                 console.print(f" [{idx}/{total}] Processing rule: [bold cyan]{name}[/] ({pol.action.upper()})")
 
@@ -148,14 +241,14 @@ class SecurityPolicyAgent:
                     console.print(f"       [bold red][FAIL] Failed[/] -> {name} ({exc})")
                     log.error(f"[FAIL] Failed security policy {name}: {exc}")
 
-            # Commit changes if in live mode
+            # Commit while still in configure mode
             if not self.dry_run:
-                self.ssh.exit_configure()
                 if self.auto_commit:
                     console.print("\n[bold]Committing candidate configuration on firewall ...[/]")
                     commit_out = self.ssh.commit(description="Security Policy Agent Push")
                     log.info(f"Commit output:\n{commit_out.strip()}")
                     console.print("   [green]Commit completed successfully![/]")
+                self.ssh.exit_configure()
             else:
                 log.info("[DRY-RUN] Commit skipped.")
 

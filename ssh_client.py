@@ -11,10 +11,10 @@ import paramiko
 
 log = logging.getLogger("paloalto.ssh")
 
-# PAN-OS CLI prompt patterns
-_OP_PROMPT_RE  = re.compile(r"[\w@\-]+>\s*$")          # admin@hostname>
-_CFG_PROMPT_RE = re.compile(r"[\w@\-]+#\s*$")          # admin@hostname#
-_ANY_PROMPT_RE = re.compile(r"[\w@\-]+[>#]\s*$")
+# PAN-OS CLI prompt patterns (supports standard and HA prompts like admin@hostname(active)>)
+_OP_PROMPT_RE  = re.compile(r"[\w@\-\(\)]+>\s*$")
+_CFG_PROMPT_RE = re.compile(r"[\w@\-\(\)]+#\s*$")
+_ANY_PROMPT_RE = re.compile(r"[\w@\-\(\)]+[>#]\s*$")
 
 
 class PaloAltoSSHClient:
@@ -59,13 +59,14 @@ class PaloAltoSSHClient:
             look_for_keys=False,
             allow_agent=False,
         )
-        self._shell = self._client.invoke_shell(width=220, height=9999)
+        self._shell = self._client.invoke_shell(width=512, height=9999)
         self._shell.settimeout(self.cmd_timeout)
         # Consume banner/MOTD
         self._read_until_prompt(timeout=self.banner_timeout)
-        # Disable the 'less' pager so output is never paginated
+        # scripting-mode disables the interactive line editor that wraps/breaks set commands
+        self._send("set cli scripting-mode on")
         self._send("set cli pager off")
-        log.info("PAN-OS CLI ready (pager disabled, operational mode).")
+        log.info("PAN-OS CLI ready (scripting-mode on, pager off).")
 
     def disconnect(self) -> None:
         try:
@@ -97,9 +98,14 @@ class PaloAltoSSHClient:
     # ──────────────────────────────────────────
     def configure(self) -> str:
         """Enter configure mode."""
+        if self._in_configure:
+            return ""
         out = self._send("configure")
+        last = out.rstrip().split("\n")[-1] if out.strip() else ""
+        if not _CFG_PROMPT_RE.search(last):
+            raise RuntimeError(f"Failed to enter configure mode (prompt={last!r})")
         self._in_configure = True
-        log.debug("Entered configure mode.")
+        log.info("Entered configure mode.")
         return out
 
     def exit_configure(self) -> str:
@@ -131,13 +137,12 @@ class PaloAltoSSHClient:
         return [self._send(cmd) for cmd in commands]
 
     def commit(self, description: str = "") -> str:
-        """Commit the candidate configuration (must be in configure mode)."""
+        """Commit the candidate configuration from configure mode."""
         log.info("Committing configuration …")
-        if self._in_configure:
-            self.exit_configure()
+        if not self._in_configure:
+            self.configure()
         cmd = f'commit description "{description}"' if description else "commit"
-        # Commit can take a long time — use a longer timeout
-        out = self._send(cmd, timeout=120)
+        out = self._send(cmd, timeout=180)
         log.info("Commit complete.")
         return out
 
@@ -149,7 +154,7 @@ class PaloAltoSSHClient:
             raise RuntimeError("SSH shell is not open. Call connect() first.")
         log.debug(f"CMD → {command!r}")
         self._shell.send(command + "\n")
-        time.sleep(0.4)
+        time.sleep(0.6)
         out = self._read_until_prompt(timeout=timeout or self.cmd_timeout)
         log.debug(f"OUT ← {out!r}")
         return out

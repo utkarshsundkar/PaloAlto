@@ -76,6 +76,62 @@ def parse_vheader_policies(raw_text: str = EXAMPLE_POLICIES_TEXT, header_line: s
 VHEADER_EXAMPLE_POLICIES: list[dict[str, str]] = parse_vheader_policies(EXAMPLE_POLICIES_TEXT, vHEADER)
 
 
+def map_service_to_panos(service: str) -> tuple[str, str]:
+    """
+    Map Cisco/vHEADER service names to PAN-OS application + service.
+    Returns (application, service).
+    """
+    raw = (service or "any").strip()
+    if not raw or raw.lower() == "any":
+        return "any", "any"
+
+    apps: list[str] = []
+    svcs: list[str] = []
+    for part in [p.strip() for p in raw.split(",") if p.strip()]:
+        key = part.lower()
+        if key in ("http",):
+            apps.append("web-browsing")
+            svcs.append("application-default")
+        elif key in ("https", "ssl"):
+            apps.append("ssl")
+            svcs.append("application-default")
+        elif key in ("dns",):
+            apps.append("dns")
+            svcs.append("application-default")
+        elif key in ("ssh",):
+            apps.append("ssh")
+            svcs.append("application-default")
+        elif key in ("ntp",):
+            apps.append("ntp")
+            svcs.append("application-default")
+        elif key in ("smtp",):
+            apps.append("smtp")
+            svcs.append("application-default")
+        elif key in ("icmp", "ping"):
+            apps.append("ping")
+            svcs.append("application-default")
+        elif key.startswith("tcp-") and key[4:].isdigit():
+            svcs.append(part.upper() if part.upper().startswith("TCP-") else f"TCP-{key[4:]}")
+            apps.append("any")
+        else:
+            svcs.append(part)
+            apps.append("any")
+
+    unique_apps = []
+    for a in apps:
+        if a not in unique_apps:
+            unique_apps.append(a)
+    unique_svcs = []
+    for s in svcs:
+        if s not in unique_svcs:
+            unique_svcs.append(s)
+    if set(unique_svcs) == {"application-default"}:
+        return ", ".join(unique_apps), "application-default"
+    if "application-default" in unique_svcs and len(unique_svcs) > 1:
+        unique_svcs = [s for s in unique_svcs if s != "application-default"]
+    return ", ".join(unique_apps) if unique_apps else "any", ", ".join(unique_svcs) if unique_svcs else "any"
+
+
 def vheader_to_security_policy_dict(item: dict[str, str]) -> dict[str, Any]:
     """
     Translates a vHEADER rule dictionary to Palo Alto SecurityPolicy definition dict.
@@ -102,14 +158,16 @@ def vheader_to_security_policy_dict(item: dict[str, str]) -> dict[str, Any]:
 
     is_disabled = item.get("rule.disabled", "false").strip().lower() == "true"
 
+    application, pan_service = map_service_to_panos(service)
+
     return {
         "name": item.get("rule.name", "").strip(),
         "srczone": item.get("rule.sourceZone", "any").strip() or "any",
         "dstzone": item.get("rule.destinationZone", "any").strip() or "any",
         "srcaddr": src_addr or "any",
         "dstaddr": dst_addr or "any",
-        "application": "any",
-        "service": service or "any",
+        "application": application,
+        "service": pan_service,
         "action": action,
         "profile_group": item.get("rule.securityProfile", "").strip(),
         "log_start": "no",

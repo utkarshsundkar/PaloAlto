@@ -42,6 +42,11 @@ def _has_error(output: str) -> tuple[bool, str]:
         stripped = line.strip()
         if not stripped:
             continue
+        # Skip echoed CLI command lines or prompts
+        if stripped.startswith("set ") or stripped.startswith("commit") or stripped.startswith("revert") or stripped.startswith("exit"):
+            continue
+        if stripped.startswith("admin@") or stripped.startswith("[edit]"):
+            continue
         if _ERR_RE.search(stripped) and not _OK_RE.match(stripped):
             return True, stripped
     return False, ""
@@ -82,10 +87,10 @@ class PolicyPusher:
 
         # Commit
         if not self.dry_run:
-            self.ssh.exit_configure()
             if config.AUTO_COMMIT:
                 out = self.ssh.commit(description=config.COMMIT_DESCRIPTION)
                 log.info(f"Commit output:\n{out.strip()}")
+            self.ssh.exit_configure()
         else:
             log.info("[DRY-RUN] Would commit here.")
 

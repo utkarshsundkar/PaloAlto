@@ -10,19 +10,35 @@ from excel_reader import (
 )
 
 
+def _format_item(item: str) -> str:
+    item = item.strip()
+    if not item:
+        return ""
+    if " " in item and not (item.startswith('"') and item.endswith('"')):
+        return f'"{item}"'
+    return item
+
+
 def _members(value: str) -> str:
     """
     Convert a comma-separated string into PAN-OS member syntax.
     'A, B, C'  →  '[ A B C ]'
     'A'        →  'A'
     """
-    items = [v.strip() for v in value.split(",") if v.strip()]
+    if not value or not str(value).strip():
+        return "any"
+    items = [_format_item(v) for v in str(value).split(",") if v.strip()]
+    if not items:
+        return "any"
     if len(items) == 1:
         return items[0]
     return "[ " + " ".join(items) + " ]"
 
 
-BASE = f"set vsys {config.VSYS}"
+if getattr(config, "USE_VSYS_PREFIX", False):
+    BASE = f"set vsys {config.VSYS}"
+else:
+    BASE = "set"
 
 
 class CLIBuilder:
@@ -83,16 +99,17 @@ class CLIBuilder:
     @staticmethod
     def security_zone(zone: SecurityZone) -> list[str]:
         base = f"{BASE} zone \"{zone.name}\""
-        mode = zone.mode   # layer3 | layer2 | virtual-wire | tap | tunnel
+        mode = zone.mode or "layer3"   # layer3 | layer2 | virtual-wire | tap | tunnel
 
-        cmds = []
+        cmds = [f"{base} network {mode} [ ]"]
+
         # Bind each interface
         if zone.interfaces:
             for iface in [i.strip() for i in zone.interfaces.split(",") if i.strip()]:
-                cmds.append(f"{base} network {mode} member {iface}")
+                cmds.append(f"{base} network {mode} {iface}")
 
         # User-ID
-        if zone.enable_userid.lower() == "yes":
+        if getattr(zone, "enable_userid", "").lower() == "yes":
             cmds.append(f"{base} enable-user-identification yes")
 
         if zone.description:
@@ -163,16 +180,29 @@ class CLIBuilder:
     def security_policy(pol: SecurityPolicy) -> list[str]:
         base = f"{BASE} rulebase security rules \"{pol.name}\""
 
+        action = (pol.action or "allow").lower()
+        if action in ("permit", "accept"):
+            action = "allow"
+        elif action in ("drop", "block"):
+            action = "deny"
+
+        srczone = pol.srczone or "any"
+        dstzone = pol.dstzone or "any"
+        srcaddr = pol.srcaddr or "any"
+        dstaddr = pol.dstaddr or "any"
+        app = pol.application or "any"
+        svc = pol.service or "any"
+
         cmds = [
-            f"{base} from {_members(pol.srczone)}",
-            f"{base} to {_members(pol.dstzone)}",
-            f"{base} source {_members(pol.srcaddr)}",
-            f"{base} destination {_members(pol.dstaddr)}",
-            f"{base} application {_members(pol.application)}",
-            f"{base} service {_members(pol.service)}",
-            f"{base} action {pol.action}",
-            f"{base} log-start {pol.log_start}",
-            f"{base} log-end {pol.log_end}",
+            f"{base} from {_members(srczone)}",
+            f"{base} to {_members(dstzone)}",
+            f"{base} source {_members(srcaddr)}",
+            f"{base} destination {_members(dstaddr)}",
+            f"{base} application {_members(app)}",
+            f"{base} service {_members(svc)}",
+            f"{base} action {action}",
+            f"{base} log-start {pol.log_start or 'no'}",
+            f"{base} log-end {pol.log_end or 'yes'}",
         ]
 
         if pol.profile_group:
