@@ -1,0 +1,763 @@
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" from INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" to INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" source Lavelle_INT_DC_Prv_Pri_192.168.25.25
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" destination any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" source-translation static-ip translated-address Lavelle_INT_DC_Pub_Pri_14.142.60.33
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._2" description "SD WAN Lavelle NAT_192.168.25.25"
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" from INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" to INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" source SAP_SandBox
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" destination 10.23.84.250
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" destination-translation translated-address 192.168.225.203
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._3" description "SD WAN Lavelle NAT_192.168.25.25"
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" from INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" to INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" source 192.168.225.203
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" destination SAP_SandBox
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" source-translation static-ip translated-address 10.23.84.250
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._4" description "SD WAN Lavelle NAT_192.168.25.25"
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" from INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" to INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" source SAP_SandBox
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" destination 10.23.84.251
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" destination-translation translated-address 192.168.225.203
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._5" description "SD WAN Lavelle NAT_192.168.25.25"
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" from INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" to INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" source 192.168.225.203
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" destination SAP_SandBox
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" source-translation static-ip translated-address 10.23.84.251
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_192.168.25._6" description "SD WAN Lavelle NAT_192.168.25.25"
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" from INSIDE_ZONE
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" to INTERNET_WAN
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" source SAP-server
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" destination SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" service any
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_7" description "SSC chennai Translated NAT for SAP access_Bidirectional"
+set rulebase nat rules "NAT_CityBank_New_NAT_8" from INSIDE_ZONE
+set rulebase nat rules "NAT_CityBank_New_NAT_8" to INTERNET_WAN
+set rulebase nat rules "NAT_CityBank_New_NAT_8" source City_Bank_NAT
+set rulebase nat rules "NAT_CityBank_New_NAT_8" destination any
+set rulebase nat rules "NAT_CityBank_New_NAT_8" service any
+set rulebase nat rules "NAT_CityBank_New_NAT_8" source-translation static-ip translated-address 14.142.60.48
+set rulebase nat rules "NAT_CityBank_New_NAT_8" description "CityBank New NAT"
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" from INSIDE_ZONE
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" to INTERNET_WAN
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" source Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" destination CBSL_IP
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" service any
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_9" description "LTFS_CBSL No NAT rule_Mumbai"
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" from INSIDE_ZONE
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" to INTERNET_WAN
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" source CIT_NOC_DR_10.9.137.0_M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" destination SAP-server
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" service any
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" source-translation static-ip translated-address SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_10" description "SSC chennai Translated NAT for SAP access_Bidirectional"
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" from INSIDE_ZONE
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" to INTERNET_WAN
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" source SAP-server
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" destination SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" service any
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" destination-translation translated-address CIT_NOC_DR_10.9.137.0_M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_11" description "SSC chennai Translated NAT for SAP access_Bidirectional"
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" from INTERNET_WAN
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" to INSIDE_ZONE
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" source CBSL_IP
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" destination Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" service any
+set rulebase nat rules "NAT_LTFS_CBSL_No_NAT_rule_Mumbai_I_12" description "LTFS_CBSL No NAT rule_Mumbai (Inside)"
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" from INTERNET_WAN
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" to INSIDE_ZONE
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" source AnyConnect_VPN_Pool_DC
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" destination AnyConnect_LTFS_DC_DR_LAN
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" service any
+set rulebase nat rules "NAT_AnyConnect_SSL_VPN_No-NAT_Rule_13" description "AnyConnect_SSL_VPN_No-NAT_Rule"
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" from INSIDE_ZONE
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" to INTERNET_WAN
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" source AnyConnect_LTFS_DC_DR_LAN
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" destination AnyConnect_VPN_Pool_DC
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" service any
+set rulebase nat rules "NAT_Cisco_AnyConnect_Reverse_NAT_r_14" description "Cisco AnyConnect Reverse NAT rule"
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" from INTERNET_WAN
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" to INSIDE_ZONE
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" source SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" destination SAP-server
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" service any
+set rulebase nat rules "NAT_SSC_chennai_Translated_NAT_for_15" description "SSC chennai Translated NAT for SAP access"
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" from INTERNET_WAN
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" to INSIDE_ZONE
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" source AnyConnect_VPN_Pool_DC
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" destination GCP_PROD_LAN_172.30.0.0
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" service any
+set rulebase nat rules "NAT_NO_NAT_Rule_for_AnyConnect_VPN_16" description "NO NAT Rule for AnyConnect VPN to Google Cloud Platform"
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" from INSIDE_ZONE
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" to INTERNET_WAN
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" source Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" destination Net_Nihilent_172.27.29.0
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" service any
+set rulebase nat rules "NAT_LTFS_NIHILENT_17" description "LTFS_NIHILENT"
+set rulebase nat rules "NAT_Rule_17" from INTERNET_WAN
+set rulebase nat rules "NAT_Rule_17" to INSIDE_ZONE
+set rulebase nat rules "NAT_Rule_17" source any
+set rulebase nat rules "NAT_Rule_17" destination 14.142.60.5
+set rulebase nat rules "NAT_Rule_17" service any
+set rulebase nat rules "NAT_Rule_17" destination-translation translated-address 10.3.11.32
+set rulebase nat rules "NAT_Rule_18" from INTERNET_WAN
+set rulebase nat rules "NAT_Rule_18" to INSIDE_ZONE
+set rulebase nat rules "NAT_Rule_18" source any
+set rulebase nat rules "NAT_Rule_18" destination 14.142.60.5
+set rulebase nat rules "NAT_Rule_18" service any
+set rulebase nat rules "NAT_Rule_18" destination-translation translated-address 10.3.11.238
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" from INTERNET_WAN
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" to INSIDE_ZONE
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" source any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" destination 14.142.60.98
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" service any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" destination-translation translated-address 10.3.11.229
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_20" description "NAT request for 10.3.11.229 on port 514 - 2289728"
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" from INTERNET_WAN
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" to INSIDE_ZONE
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" source any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" destination 14.142.60.99
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" service any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" destination-translation translated-address 10.3.11.228
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228_21" description "NAT request for 10.3.11.228"
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" from INSIDE_ZONE
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" to INTERNET_WAN
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" source 10.3.11.229
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" destination any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" service any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" source-translation static-ip translated-address 14.142.60.98
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.229_on_22" description "NAT request for 10.3.11.229 on port 514 - 2289728"
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" from INSIDE_ZONE
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" to INTERNET_WAN
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" source 10.3.11.228
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" destination any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" service any
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" source-translation static-ip translated-address 14.142.60.99
+set rulebase nat rules "NAT_NAT_request_for_10.3.11.228o2_23" description "NAT request for 10.3.11.228o2"
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" from INTERNET_WAN
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" to INSIDE_ZONE
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" source any
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" destination 14.142.60.2
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" service any
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" destination-translation translated-address 10.3.11.215
+set rulebase nat rules "NAT_IIS_WEB_10.3.11.215_Outside_24" description "IIS WEB_10.3.11.215_Outside"
+set rulebase nat rules "NAT_Cubictree_Litigation_25" from INTERNET_WAN
+set rulebase nat rules "NAT_Cubictree_Litigation_25" to INSIDE_ZONE
+set rulebase nat rules "NAT_Cubictree_Litigation_25" source any
+set rulebase nat rules "NAT_Cubictree_Litigation_25" destination 14.142.60.13
+set rulebase nat rules "NAT_Cubictree_Litigation_25" service any
+set rulebase nat rules "NAT_Cubictree_Litigation_25" destination-translation translated-address DMZ_10.3.11.105
+set rulebase nat rules "NAT_Cubictree_Litigation_25" description "Cubictree Litigation"
+set rulebase nat rules "NAT_Rule_25" from INSIDE_ZONE
+set rulebase nat rules "NAT_Rule_25" to INTERNET_WAN
+set rulebase nat rules "NAT_Rule_25" source 10.3.11.32
+set rulebase nat rules "NAT_Rule_25" destination any
+set rulebase nat rules "NAT_Rule_25" service any
+set rulebase nat rules "NAT_Rule_25" source-translation static-ip translated-address 14.142.60.5
+set rulebase nat rules "NAT_Rule_26" from INSIDE_ZONE
+set rulebase nat rules "NAT_Rule_26" to INTERNET_WAN
+set rulebase nat rules "NAT_Rule_26" source 10.3.11.238
+set rulebase nat rules "NAT_Rule_26" destination any
+set rulebase nat rules "NAT_Rule_26" service any
+set rulebase nat rules "NAT_Rule_26" source-translation static-ip translated-address 14.142.60.5
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" from INSIDE_ZONE
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" to INTERNET_WAN
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" source 10.3.11.215
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" destination any
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" service any
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" source-translation static-ip translated-address 14.142.60.2
+set rulebase nat rules "NAT_IIS_WEB_Inside_28" description "IIS WEB_Inside"
+set rulebase nat rules "NAT_Cubictree_Litigation_29" from INSIDE_ZONE
+set rulebase nat rules "NAT_Cubictree_Litigation_29" to INTERNET_WAN
+set rulebase nat rules "NAT_Cubictree_Litigation_29" source DMZ_10.3.11.105
+set rulebase nat rules "NAT_Cubictree_Litigation_29" destination any
+set rulebase nat rules "NAT_Cubictree_Litigation_29" service any
+set rulebase nat rules "NAT_Cubictree_Litigation_29" source-translation static-ip translated-address 14.142.60.13
+set rulebase nat rules "NAT_Cubictree_Litigation_29" description "Cubictree Litigation"
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" from INTERNET_WAN
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" to INSIDE_ZONE
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" source any
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" destination 14.142.60.3
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" service any
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" destination-translation translated-address 10.32.5.69
+set rulebase nat rules "NAT_Out_to_In_Litigation_Managemen_30" description "Out to In Litigation Management System (UAT)"
+set rulebase nat rules "NAT_Omni_Scan_31" from INTERNET_WAN
+set rulebase nat rules "NAT_Omni_Scan_31" to INSIDE_ZONE
+set rulebase nat rules "NAT_Omni_Scan_31" source any
+set rulebase nat rules "NAT_Omni_Scan_31" destination 121.242.59.169
+set rulebase nat rules "NAT_Omni_Scan_31" service any
+set rulebase nat rules "NAT_Omni_Scan_31" destination-translation translated-address IP_10.3.1.73
+set rulebase nat rules "NAT_Omni_Scan_31" description "Omni Scan"
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" from INSIDE_ZONE
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" to INTERNET_WAN
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" source 10.32.5.69
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" destination any
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" service any
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" source-translation static-ip translated-address 14.142.60.3
+set rulebase nat rules "NAT_In_to_Out_Litigation_Managemen_32" description "In to Out Litigation Management System (UAT)"
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" from INTERNET_WAN
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" to INSIDE_ZONE
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" source any
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" destination 14.142.60.9
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" service any
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" destination-translation translated-address 10.3.11.30
+set rulebase nat rules "NAT_Public_to_SFTP_10.3.11.30_33" description "Public to SFTP 10.3.11.30"
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" from INSIDE_ZONE
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" to INTERNET_WAN
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" source 10.3.11.30
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" destination any
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" service any
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" source-translation static-ip translated-address 14.142.60.9
+set rulebase nat rules "NAT_SFTP_10.3.11.30_to_Public_34" description "SFTP 10.3.11.30 to Public"
+set rulebase nat rules "NAT_10.32.5.64_35" from INSIDE_ZONE
+set rulebase nat rules "NAT_10.32.5.64_35" to INTERNET_WAN
+set rulebase nat rules "NAT_10.32.5.64_35" source 10.32.5.64
+set rulebase nat rules "NAT_10.32.5.64_35" destination any
+set rulebase nat rules "NAT_10.32.5.64_35" service any
+set rulebase nat rules "NAT_10.32.5.64_35" source-translation static-ip translated-address 14.142.60.11
+set rulebase nat rules "NAT_10.32.5.64_35" description "10.32.5.64"
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" from INTERNET_WAN
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" to INSIDE_ZONE
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" source any
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" destination 14.142.60.12
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" service any
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" destination-translation translated-address 10.3.11.55
+set rulebase nat rules "NAT_Public_To_Relay_Server_1_36" description "Public_To_Relay_Server 1"
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" from INSIDE_ZONE
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" to INTERNET_WAN
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" source 10.3.11.55
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" destination any
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" service any
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" source-translation static-ip translated-address 14.142.60.12
+set rulebase nat rules "NAT_Relay_Server_TO_Public_37" description "Relay_Server_TO_Public"
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" from INSIDE_ZONE
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" to INTERNET_WAN
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" source Group_LTFS_DC_Subnets
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" destination 172.41.0.0_AWS_EV_VPC_LAN
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" service any
+set rulebase nat rules "NAT_AWS_EV_VPC_to_LTFS_DC_38" description "AWS EV VPC to LTFS DC"
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" from INSIDE_ZONE
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" to INTERNET_WAN
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" source 10.3.11.29
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" destination any
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" service any
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" source-translation static-ip translated-address PUB_IP_14.142.60.20
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_39" description "Static NAT Rule for G Suite AD Sync"
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" from INTERNET_WAN
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" to INSIDE_ZONE
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" source any
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" destination PUB_IP_14.142.60.20
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" service any
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" destination-translation translated-address 10.3.11.29
+set rulebase nat rules "NAT_Static_NAT_Rule_for_G_Suite_AD_40" description "Static NAT Rule for G Suite AD Sync"
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" from INSIDE_ZONE
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" to INTERNET_WAN
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" source Citrix_XenApp_10.3.11.73
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" destination any
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" service any
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" source-translation static-ip translated-address PUB_IP_14.142.60.22
+set rulebase nat rules "NAT_Citrix_XenApp_Server_41" description "Citrix XenApp Server"
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" from INTERNET_WAN
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" to INSIDE_ZONE
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" source any
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" destination PUB_IP_14.142.60.22
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" service any
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" destination-translation translated-address Citrix_XenApp_10.3.11.73
+set rulebase nat rules "NAT_Citrix_XenApp_Server_42" description "Citrix_XenApp Server"
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" from INTERNET_WAN
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" to INSIDE_ZONE
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" source GCP_POC_LAN_10.160.1.0
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" destination Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" service any
+set rulebase nat rules "NAT_Google_Cloud_to_LTFS_DC_FOR_PO_43" description "Google_Cloud to LTFS_DC FOR POC PURPOSE"
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" from INSIDE_ZONE
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" to INTERNET_WAN
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" source Lavelle_INT_DC_Prv_Sec_192.168.25.26
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" destination any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" service any
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" source-translation static-ip translated-address Lavelle_INT_DC_Pub_Sec_14.142.60.34
+set rulebase nat rules "NAT_SD_WAN_Lavelle_NAT_Rule_192.16_44" description "SD WAN Lavelle NAT Rule_192.168.25.26"
+set rulebase nat rules "NAT_10.3.11.89_Public_45" from INSIDE_ZONE
+set rulebase nat rules "NAT_10.3.11.89_Public_45" to INTERNET_WAN
+set rulebase nat rules "NAT_10.3.11.89_Public_45" source Public_DNS_10.3.11.89
+set rulebase nat rules "NAT_10.3.11.89_Public_45" destination any
+set rulebase nat rules "NAT_10.3.11.89_Public_45" service any
+set rulebase nat rules "NAT_10.3.11.89_Public_45" source-translation static-ip translated-address IP_14.142.60.38
+set rulebase nat rules "NAT_10.3.11.89_Public_45" description "10.3.11.89_Public"
+set rulebase nat rules "NAT_Public_10.3.11.89_46" from INTERNET_WAN
+set rulebase nat rules "NAT_Public_10.3.11.89_46" to INSIDE_ZONE
+set rulebase nat rules "NAT_Public_10.3.11.89_46" source any
+set rulebase nat rules "NAT_Public_10.3.11.89_46" destination IP_14.142.60.38
+set rulebase nat rules "NAT_Public_10.3.11.89_46" service any
+set rulebase nat rules "NAT_Public_10.3.11.89_46" destination-translation translated-address Public_DNS_10.3.11.89
+set rulebase nat rules "NAT_Public_10.3.11.89_46" description "Public_10.3.11.89"
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" from INTERNET_WAN
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" to INSIDE_ZONE
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" source any
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" destination UAT_ADFS_PUB_14.142.60.39
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" service any
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" destination-translation translated-address UAT_ADFS_PRIV_10.32.5.42
+set rulebase nat rules "NAT_From_Public_NAT_rule_for_UAT_A_47" description "From Public NAT rule for UAT ADFS"
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" from INSIDE_ZONE
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" to INTERNET_WAN
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" source UAT_ADFS_PRIV_10.32.5.42
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" destination any
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" service any
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" source-translation static-ip translated-address UAT_ADFS_PUB_14.142.60.39
+set rulebase nat rules "NAT_UAT_ADFS_to_Public_NAT_rule_48" description "UAT_ADFS to Public NAT rule"
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" from INSIDE_ZONE
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" to INTERNET_WAN
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" source Net_DC_APP_Old_10.3.1.0
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" destination Palo_Alto_Pool_172.30.80.0
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" service any
+set rulebase nat rules "NAT_No_NAT_Rule_for_Palo_Alto_Prod_49" description "No NAT Rule for Palo Alto Prod Pool through S2S VPN_1"
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" from INSIDE_ZONE
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" to INTERNET_WAN
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" source Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" destination Palo_Alto_Pool_172.30.80.0
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" service any
+set rulebase nat rules "NAT_No_NAT_Rule_for_palo_alto_10.3_50" description "No NAT Rule for palo alto_10.3.11.0"
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" from INSIDE_ZONE
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" to INTERNET_WAN
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" source Net_DC_APP_PROD_10.3.24.0
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" destination Palo_Alto_Pool_172.30.80.0
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" service any
+set rulebase nat rules "NAT_No_nat_rule_for_palo_alto_10.3_51" description "No nat rule for palo alto_10.3.24.0"
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" from INSIDE_ZONE
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" to INTERNET_WAN
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" source Net_DC_DB_Old_10.6.1.0
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" destination Palo_Alto_Pool_172.30.80.0
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" service any
+set rulebase nat rules "NAT_No_nat_rule_for_Palo_Alto_10.6_52" description "No nat rule for Palo Alto_10.6.1.0"
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" from INTERNET_WAN
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" to INSIDE_ZONE
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" source Anunta_Network_Mum-Chn
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" destination Anunta_Dest_Group
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" service any
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_53" description "LTFS_Anunta No NAT rule_Mumbai"
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" from INTERNET_WAN
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" to INSIDE_ZONE
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" source SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" destination SAP_SandBox
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" service any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" source-translation static-ip translated-address 192.168.225.203
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_54" description "NOC Processes and Monitoring"
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" from INTERNET_WAN
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" to INSIDE_ZONE
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" source AnuntaNOC_Mont
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" destination Anunta_Dest_Group
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" service any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_55" description "NOC Processes and Monitoring"
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" from INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" to INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" source CIT_NOC_IPSegmet
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" destination PIM_Group
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" service any
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_56" description "CIT NOC No NAT"
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" from INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" to INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" source CIT-LnT-New
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" destination LTFS-AD-DNS
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" service any
+set rulebase nat rules "NAT_CIT_NOC_No_NAT-_2791118_57" description "CIT NOC No NAT- 2791118"
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" from INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" to INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" source LTFS-AD-DNS
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" destination CIT-LnT-New
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" service any
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_-_2791118_58" description "CIT NOC No NAT - 2791118"
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" from INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" to INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" source CIT_NOC_IPSegmet
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" destination SAP-server
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" service any
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" source-translation static-ip translated-address SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_59" description "CIT NOC to SAP_FCM"
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" from INSIDE_ZONE
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" to INTERNET_WAN
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" source Anunta_Dest_Group
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" destination Anunta_Network_Mum-Chn
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" service any
+set rulebase nat rules "NAT_LTFS_Anunta_No_NAT_rule_Mumbai_60" description "LTFS_Anunta No NAT rule_Mumbai (Inside)"
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" from INSIDE_ZONE
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" to INTERNET_WAN
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" source Anunta_Dest_Group
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" destination AnuntaNOC_Mont
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" service any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring-1_61" description "NOC Processes and Monitoring-1"
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" from INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" to INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" source PIM_Group
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" destination CIT_NOC_IPSegmet
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" service any
+set rulebase nat rules "NAT_CIT_NOC_No_NAT_In-Out_62" description "CIT_NOC No NAT In-Out"
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" from INSIDE_ZONE
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" to INTERNET_WAN
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" source SAP-server
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" destination SSC_Chennai_10.23.84.0M24
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" service any
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" destination-translation translated-address CIT_NOC_IPSegmet
+set rulebase nat rules "NAT_CIT_NOC_to_SAP_FCM_reverce_res_63" description "CIT_NOC to SAP_FCM reverce response"
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" from INTERNET_WAN
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" to INSIDE_ZONE
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" source AnyConnect_VPN_Pool_DC
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" destination Kalina_Mahape_FS
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" service any
+set rulebase nat rules "NAT_Cisco_AnyConnect_No_NAT_for_Fi_64" description "Cisco AnyConnect No NAT for Fileserver"
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" from INSIDE_ZONE
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" to INTERNET_WAN
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" source Kalina_Mahape_FS
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" destination AnyConnect_VPN_Pool_DC
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" service any
+set rulebase nat rules "NAT_Kalina_Mahape_to_Cisco_AnyConn_65" description "Kalina_Mahape to Cisco AnyConnect No NAT"
+set rulebase nat rules "NAT_bms_In_to_Out_66" from INSIDE_ZONE
+set rulebase nat rules "NAT_bms_In_to_Out_66" to INTERNET_WAN
+set rulebase nat rules "NAT_bms_In_to_Out_66" source IP_10.3.11.159
+set rulebase nat rules "NAT_bms_In_to_Out_66" destination any
+set rulebase nat rules "NAT_bms_In_to_Out_66" service any
+set rulebase nat rules "NAT_bms_In_to_Out_66" source-translation static-ip translated-address IP_14.142.60.71
+set rulebase nat rules "NAT_bms_In_to_Out_66" description "bms_In to Out"
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" from INSIDE_ZONE
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" to INTERNET_WAN
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" source 10.3.11.170
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" destination any
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" service any
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" source-translation static-ip translated-address IP_14.142.60.72
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_67" description "ERP Homesites_In to Out"
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" from INSIDE_ZONE
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" to INTERNET_WAN
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" source 10.3.11.243
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" destination any
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" service any
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" source-translation static-ip translated-address IP_14.142.60.72
+set rulebase nat rules "NAT_ERP_Homesites_In_to_Out_68" description "ERP Homesites_In to Out"
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" from INSIDE_ZONE
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" to INTERNET_WAN
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" source 10.3.11.149
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" destination any
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" service any
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" source-translation static-ip translated-address IP_14.142.60.74
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_In_to_Out_69" description "Kaspersky_PublicFQDN_In to Out"
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" from INSIDE_ZONE
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" to INTERNET_WAN
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" source IP_10.3.11.172
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" destination any
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" service any
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" source-translation static-ip translated-address IP_14.142.60.77
+set rulebase nat rules "NAT_Relay_Inside_to_Outside_70" description "Relay Inside to Outside"
+set rulebase nat rules "NAT_H2H_for_Axis_71" from INSIDE_ZONE
+set rulebase nat rules "NAT_H2H_for_Axis_71" to INTERNET_WAN
+set rulebase nat rules "NAT_H2H_for_Axis_71" source 10.32.5.58
+set rulebase nat rules "NAT_H2H_for_Axis_71" destination any
+set rulebase nat rules "NAT_H2H_for_Axis_71" service any
+set rulebase nat rules "NAT_H2H_for_Axis_71" source-translation static-ip translated-address 14.142.60.79
+set rulebase nat rules "NAT_H2H_for_Axis_71" description "H2H for Axis"
+set rulebase nat rules "NAT_Tresuary-H2H_72" from INSIDE_ZONE
+set rulebase nat rules "NAT_Tresuary-H2H_72" to INTERNET_WAN
+set rulebase nat rules "NAT_Tresuary-H2H_72" source 10.3.11.174
+set rulebase nat rules "NAT_Tresuary-H2H_72" destination any
+set rulebase nat rules "NAT_Tresuary-H2H_72" service any
+set rulebase nat rules "NAT_Tresuary-H2H_72" source-translation static-ip translated-address 14.142.60.82
+set rulebase nat rules "NAT_Tresuary-H2H_72" description "Tresuary-H2H"
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" from INSIDE_ZONE
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" to INTERNET_WAN
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" source 10.3.11.35
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" destination any
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" service any
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" source-translation static-ip translated-address 14.142.60.86
+set rulebase nat rules "NAT_E_Y_UAT_SFTP_73" description "E&Y UAT SFTP"
+set rulebase nat rules "NAT_Tracfin_application_74" from INSIDE_ZONE
+set rulebase nat rules "NAT_Tracfin_application_74" to INTERNET_WAN
+set rulebase nat rules "NAT_Tracfin_application_74" source 10.3.11.53
+set rulebase nat rules "NAT_Tracfin_application_74" destination any
+set rulebase nat rules "NAT_Tracfin_application_74" service any
+set rulebase nat rules "NAT_Tracfin_application_74" source-translation static-ip translated-address 14.142.60.89
+set rulebase nat rules "NAT_Tracfin_application_74" description "Tracfin application"
+set rulebase nat rules "NAT_DSP_On-Prim_75" from INSIDE_ZONE
+set rulebase nat rules "NAT_DSP_On-Prim_75" to INTERNET_WAN
+set rulebase nat rules "NAT_DSP_On-Prim_75" source 10.3.11.181
+set rulebase nat rules "NAT_DSP_On-Prim_75" destination any
+set rulebase nat rules "NAT_DSP_On-Prim_75" service any
+set rulebase nat rules "NAT_DSP_On-Prim_75" source-translation static-ip translated-address 14.142.60.93
+set rulebase nat rules "NAT_DSP_On-Prim_75" description "DSP On-Prim"
+set rulebase nat rules "NAT_DSP_On-Prim_76" from INSIDE_ZONE
+set rulebase nat rules "NAT_DSP_On-Prim_76" to INTERNET_WAN
+set rulebase nat rules "NAT_DSP_On-Prim_76" source 10.3.11.232
+set rulebase nat rules "NAT_DSP_On-Prim_76" destination any
+set rulebase nat rules "NAT_DSP_On-Prim_76" service any
+set rulebase nat rules "NAT_DSP_On-Prim_76" source-translation static-ip translated-address 14.142.60.93
+set rulebase nat rules "NAT_DSP_On-Prim_76" description "DSP On-Prim"
+set rulebase nat rules "NAT_SFTP_server_77" from INSIDE_ZONE
+set rulebase nat rules "NAT_SFTP_server_77" to INTERNET_WAN
+set rulebase nat rules "NAT_SFTP_server_77" source 10.3.11.191
+set rulebase nat rules "NAT_SFTP_server_77" destination any
+set rulebase nat rules "NAT_SFTP_server_77" service any
+set rulebase nat rules "NAT_SFTP_server_77" source-translation static-ip translated-address 14.142.60.94
+set rulebase nat rules "NAT_SFTP_server_77" description "SFTP server"
+set rulebase nat rules "NAT_Klassify_server_78" from INSIDE_ZONE
+set rulebase nat rules "NAT_Klassify_server_78" to INTERNET_WAN
+set rulebase nat rules "NAT_Klassify_server_78" source 10.3.11.193
+set rulebase nat rules "NAT_Klassify_server_78" destination any
+set rulebase nat rules "NAT_Klassify_server_78" service any
+set rulebase nat rules "NAT_Klassify_server_78" source-translation static-ip translated-address 14.142.60.95
+set rulebase nat rules "NAT_Klassify_server_78" description "Klassify server"
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" from INTERNET_WAN
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" to INSIDE_ZONE
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" source any
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" destination IP_14.142.60.72
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" service any
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" destination-translation translated-address 10.3.11.170
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_79" description "ERP Homesite_Out to In"
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" from INTERNET_WAN
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" to INSIDE_ZONE
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" source any
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" destination IP_14.142.60.72
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" service any
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" destination-translation translated-address 10.3.11.243
+set rulebase nat rules "NAT_ERP_Homesite_Out_to_In_80" description "ERP Homesite_Out to In"
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" from INTERNET_WAN
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" to INSIDE_ZONE
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" source any
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" destination IP_14.142.60.74
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" service any
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" destination-translation translated-address 10.3.11.149
+set rulebase nat rules "NAT_Kaspersky_PublicFQDN_Out_to_In_81" description "Kaspersky PublicFQDN_Out to In"
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" from INTERNET_WAN
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" to INSIDE_ZONE
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" source any
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" destination IP_14.142.60.77
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" service any
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" destination-translation translated-address IP_10.3.11.172
+set rulebase nat rules "NAT_Relay_Outside_to_Inside_82" description "Relay Outside to Inside"
+set rulebase nat rules "NAT_H2H_for_Axis_83" from INTERNET_WAN
+set rulebase nat rules "NAT_H2H_for_Axis_83" to INSIDE_ZONE
+set rulebase nat rules "NAT_H2H_for_Axis_83" source any
+set rulebase nat rules "NAT_H2H_for_Axis_83" destination 14.142.60.79
+set rulebase nat rules "NAT_H2H_for_Axis_83" service any
+set rulebase nat rules "NAT_H2H_for_Axis_83" destination-translation translated-address 10.32.5.58
+set rulebase nat rules "NAT_H2H_for_Axis_83" description "H2H for Axis"
+set rulebase nat rules "NAT_Tresuary-H2H_84" from INTERNET_WAN
+set rulebase nat rules "NAT_Tresuary-H2H_84" to INSIDE_ZONE
+set rulebase nat rules "NAT_Tresuary-H2H_84" source any
+set rulebase nat rules "NAT_Tresuary-H2H_84" destination 14.142.60.82
+set rulebase nat rules "NAT_Tresuary-H2H_84" service any
+set rulebase nat rules "NAT_Tresuary-H2H_84" destination-translation translated-address 10.3.11.174
+set rulebase nat rules "NAT_Tresuary-H2H_84" description "Tresuary-H2H"
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" from INTERNET_WAN
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" to INSIDE_ZONE
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" source any
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" destination 14.142.60.86
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" service any
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" destination-translation translated-address 10.3.11.35
+set rulebase nat rules "NAT_E_Y_UAT_SFTP-1_85" description "E&Y UAT SFTP-1"
+set rulebase nat rules "NAT_Tracfin_application_86" from INTERNET_WAN
+set rulebase nat rules "NAT_Tracfin_application_86" to INSIDE_ZONE
+set rulebase nat rules "NAT_Tracfin_application_86" source any
+set rulebase nat rules "NAT_Tracfin_application_86" destination 14.142.60.89
+set rulebase nat rules "NAT_Tracfin_application_86" service any
+set rulebase nat rules "NAT_Tracfin_application_86" destination-translation translated-address 10.3.11.53
+set rulebase nat rules "NAT_Tracfin_application_86" description "Tracfin application"
+set rulebase nat rules "NAT_DSP_On-Prim_87" from INTERNET_WAN
+set rulebase nat rules "NAT_DSP_On-Prim_87" to INSIDE_ZONE
+set rulebase nat rules "NAT_DSP_On-Prim_87" source any
+set rulebase nat rules "NAT_DSP_On-Prim_87" destination 14.142.60.93
+set rulebase nat rules "NAT_DSP_On-Prim_87" service any
+set rulebase nat rules "NAT_DSP_On-Prim_87" destination-translation translated-address 10.3.11.181
+set rulebase nat rules "NAT_DSP_On-Prim_87" description "DSP On-Prim"
+set rulebase nat rules "NAT_DSP_On-Prim_88" from INTERNET_WAN
+set rulebase nat rules "NAT_DSP_On-Prim_88" to INSIDE_ZONE
+set rulebase nat rules "NAT_DSP_On-Prim_88" source any
+set rulebase nat rules "NAT_DSP_On-Prim_88" destination 14.142.60.93
+set rulebase nat rules "NAT_DSP_On-Prim_88" service any
+set rulebase nat rules "NAT_DSP_On-Prim_88" destination-translation translated-address 10.3.11.232
+set rulebase nat rules "NAT_DSP_On-Prim_88" description "DSP On-Prim"
+set rulebase nat rules "NAT_Klassify_server-1_89" from INTERNET_WAN
+set rulebase nat rules "NAT_Klassify_server-1_89" to INSIDE_ZONE
+set rulebase nat rules "NAT_Klassify_server-1_89" source any
+set rulebase nat rules "NAT_Klassify_server-1_89" destination 14.142.60.95
+set rulebase nat rules "NAT_Klassify_server-1_89" service any
+set rulebase nat rules "NAT_Klassify_server-1_89" destination-translation translated-address 10.3.11.193
+set rulebase nat rules "NAT_Klassify_server-1_89" description "Klassify server-1"
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" from INTERNET_WAN
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" to INSIDE_ZONE
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" source Seclore_IP
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" destination 10.3.24.41_42_AD
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" service any
+set rulebase nat rules "NAT_Seclore_NO_NAT_90" description "Seclore_NO NAT"
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" from INSIDE_ZONE
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" to INTERNET_WAN
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" source 10.3.24.41_42_AD
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" destination Seclore_IP
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" service any
+set rulebase nat rules "NAT_Seclore_NO_NAT_Bidirection_91" description "Seclore_NO NAT Bidirection"
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" from INSIDE_ZONE
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" to INTERNET_WAN
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" source 192.100.5.12
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" destination any
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" service any
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "NAT_IRE_GUP_SRV_Internet_92" description "IRE_GUP_SRV_Internet"
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" from INSIDE_ZONE
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" to INTERNET_WAN
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" source LTFS_CTRLS_GROUP_A
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" destination CTRL_IPSEC_GROUP_B
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" service any
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_93" description "NO NAT FOR IPSEC to CTRLS"
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" from INSIDE_ZONE
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" to INTERNET_WAN
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" source CTRL_IPSEC_GROUP_B
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" destination LTFS_CTRLS_GROUP_A
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" service any
+set rulebase nat rules "NAT_NO_NAT_FOR_IPSEC_to_CTRLS_94" description "NO NAT FOR IPSEC to CTRLS"
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" from INSIDE_ZONE
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" to INTERNET_WAN
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" source LTFS_USERS
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" destination CTRLS_Genesys
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" service any
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" source-translation dynamic-ip-and-port translated-address 10.5.10.1
+set rulebase nat rules "NAT_PAT_for_CTRLs_Genesys_Access_95" description "PAT for CTRLs Genesys Access"
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" from INSIDE_ZONE
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" to INTERNET_WAN
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" source IP_10.32.5.45
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" destination any
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" service any
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" source-translation static-ip translated-address 14.142.60.27
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_96" description "SFDC SMTP VIA Netskope"
+set rulebase nat rules "NAT_SFDC_NAT_97" from INTERNET_WAN
+set rulebase nat rules "NAT_SFDC_NAT_97" to INSIDE_ZONE
+set rulebase nat rules "NAT_SFDC_NAT_97" source any
+set rulebase nat rules "NAT_SFDC_NAT_97" destination 14.142.60.27
+set rulebase nat rules "NAT_SFDC_NAT_97" service any
+set rulebase nat rules "NAT_SFDC_NAT_97" destination-translation translated-address IP_10.32.5.45
+set rulebase nat rules "NAT_SFDC_NAT_97" description "SFDC NAT"
+set rulebase nat rules "NAT_Rule_97" from INSIDE_ZONE
+set rulebase nat rules "NAT_Rule_97" to INTERNET_WAN
+set rulebase nat rules "NAT_Rule_97" source CP_Interface_10.3.10.251
+set rulebase nat rules "NAT_Rule_97" destination any
+set rulebase nat rules "NAT_Rule_97" service any
+set rulebase nat rules "NAT_Rule_97" source-translation static-ip translated-address 14.142.60.4
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" from INSIDE_ZONE
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" to INTERNET_WAN
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" source 10.32.5.228
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" destination any
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" service any
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" source-translation static-ip translated-address 14.142.60.97
+set rulebase nat rules "NAT_SFDC_SMTP_VIA_Netskope_99" description "SFDC SMTP VIA Netskope"
+set rulebase nat rules "NAT_Neo_collection_NAT_100" from INTERNET_WAN
+set rulebase nat rules "NAT_Neo_collection_NAT_100" to INSIDE_ZONE
+set rulebase nat rules "NAT_Neo_collection_NAT_100" source any
+set rulebase nat rules "NAT_Neo_collection_NAT_100" destination 14.142.60.97
+set rulebase nat rules "NAT_Neo_collection_NAT_100" service any
+set rulebase nat rules "NAT_Neo_collection_NAT_100" destination-translation translated-address 10.32.5.228
+set rulebase nat rules "NAT_Neo_collection_NAT_100" description "Neo collection NAT"
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" from INTERNET_WAN
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" to INSIDE_ZONE
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" source Chennai_DR_Subnets_Group
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" destination Powai_DC_Subnets_For_Chennai
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" service any
+set rulebase nat rules "NAT_Chennai_DR_to_Powai_DC_101" description "Chennai DR to Powai DC"
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" from INSIDE_ZONE
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" to INTERNET_WAN
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" source Powai_DC_Subnets_For_Chennai
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" destination Chennai_DR_Subnets_Group
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" service any
+set rulebase nat rules "NAT_Powai_DC_to_Chennai_DR_102" description "Powai DC to Chennai DR"
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" from any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" to any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" source SAP_SandBox
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" destination 10.23.84.250
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" service any
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" destination-translation translated-address 192.168.225.203
+set rulebase nat rules "NAT_NOC_Processes_and_Monitoring_103" description "NOC Processes and Monitoring"
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" source Net_DC_APP_PROD_10.3.24.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_PROD_10.3.24.0" description "Auto NAT for object Net_DC_APP_PROD_10.3.24.0"
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" source Net_DC_APP_UAT_10.32.8.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_UAT_10.32.8.0" description "Auto NAT for object Net_DC_APP_UAT_10.32.8.0"
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" source Net_DC_DMZ_PROD_10.3.11.0
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_PROD_10.3.11.0" description "Auto NAT for object Net_DC_DMZ_PROD_10.3.11.0"
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" source Net_DC_DB_PROD_10.3.27.0
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DB_PROD_10.3.27.0" description "Auto NAT for object Net_DC_DB_PROD_10.3.27.0"
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" source Net_DC_DMZ_NET_10.3.10.0
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_NET_10.3.10.0" description "Auto NAT for object Net_DC_DMZ_NET_10.3.10.0"
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" source Net_DC_DMZ_UAT_10.32.5.0
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DMZ_UAT_10.32.5.0" description "Auto NAT for object Net_DC_DMZ_UAT_10.32.5.0"
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" source Net_DC_DB_Old_10.6.1.0
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DB_Old_10.6.1.0" description "Auto NAT for object Net_DC_DB_Old_10.6.1.0"
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" source Net_DC_APP_Old_10.3.1.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.1.0" description "Auto NAT for object Net_DC_APP_Old_10.3.1.0"
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" source Net_DC_APP_Old_10.3.3.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.3.0" description "Auto NAT for object Net_DC_APP_Old_10.3.3.0"
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" source Net_DC_APP_Old_10.3.2.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_Old_10.3.2.0" description "Auto NAT for object Net_DC_APP_Old_10.3.2.0"
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" source Net_DC_DB_UAT_10.32.11.0
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_DB_UAT_10.32.11.0" description "Auto NAT for object Net_DC_DB_UAT_10.32.11.0"
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" from INSIDE_ZONE
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" to INTERNET_WAN
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" source Net_DC_APP_10.3.6.0
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" destination any
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" service any
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" source-translation dynamic-ip-and-port interface-address interface ethernet1/1
+set rulebase nat rules "ObjNAT_Net_DC_APP_10.3.6.0" description "Auto NAT for object Net_DC_APP_10.3.6.0"

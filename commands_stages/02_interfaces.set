@@ -1,0 +1,18 @@
+set network interface ethernet ethernet1/1 layer3 ip 121.243.105.234/28
+set network interface ethernet ethernet1/1 layer3 units ethernet1/1 ip 121.243.105.234/28
+set network interface ethernet ethernet1/2 layer3 ip 10.3.10.218/28
+set network interface ethernet ethernet1/2 layer3 units ethernet1/2 ip 10.3.10.218/28
+set network interface ethernet ethernet1/3 layer3 ip 192.168.100.1/29
+set network interface ethernet ethernet1/3 layer3 units ethernet1/3 ip 192.168.100.1/29
+set network interface ethernet ethernet1/4 layer3 ip 192.168.100.9/29
+set network interface ethernet ethernet1/4 layer3 units ethernet1/4 ip 192.168.100.9/29
+set network interface ethernet ethernet1/5 layer3 ip 10.166.26.28/28
+set network interface ethernet ethernet1/5 layer3 units ethernet1/5 ip 10.166.26.28/28
+set network interface tunnel units tunnel.1 ip 169.254.2.1/30
+set network virtual-router default interface [ ethernet1/1 ethernet1/2 ethernet1/3 ethernet1/4 ethernet1/5 tunnel.1 ]
+set zone INTERNET_WAN network layer3 [ ethernet1/1 ]
+set zone INSIDE_ZONE network layer3 [ ethernet1/2 ]
+set zone HSM_PROD network layer3 [ ethernet1/3 ]
+set zone HSM_UAT network layer3 [ ethernet1/4 ]
+set zone NEW_SDWAN_HUB network layer3 [ ethernet1/5 ]
+set zone INTERNET_WAN_static_vti_1 network layer3 [ tunnel.1 ]

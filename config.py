@@ -6,10 +6,10 @@ Edit this file to match your environment before running.
 # ─────────────────────────────────────────────
 #  Palo Alto Device Settings
 # ─────────────────────────────────────────────
-PALOALTO_HOST     = "192.168.147.139"   # Firewall management IP
+PALOALTO_HOST     = "10.233.188.122"   # Firewall management IP
 PALOALTO_PORT     = 22                  # SSH port (default 22)
 PALOALTO_USERNAME = "admin"             # SSH username
-PALOALTO_PASSWORD = "Admin@1234"        # SSH password
+PALOALTO_PASSWORD = "Admin@123"           # SSH password
 
 # ─────────────────────────────────────────────
 #  vsys  (leave "vsys1" for most deployments)

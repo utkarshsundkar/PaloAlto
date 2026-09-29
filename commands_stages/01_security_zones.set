@@ -1,0 +1,7 @@
+set zone "HSM_PROD" network layer3 [ ]
+set zone "HSM_UAT" network layer3 [ ]
+set zone "INSIDE_ZONE" network layer3 [ ]
+set zone "INTERNET_WAN" network layer3 [ ]
+set zone "INTERNET_WAN_static_vti_1" network layer3 [ ]
+set zone "NEW_SDWAN_HUB" network layer3 [ ]
+set zone "management" network layer3 [ ]
