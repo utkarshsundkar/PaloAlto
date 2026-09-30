@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palo Alto & Cisco FTD Migration Agent Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">⚡</div>
+                <div class="brand-text">
+                    <h2>PAN-OS Agent</h2>
+                    <span>FTD Migration Suite</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="stages">
+                    <span class="nav-icon">📁</span> Stage Files
+                </button>
+                <button class="nav-btn" data-tab="policies">
+                    <span class="nav-icon">🛡️</span> Policy Inspector <span class="badge badge-warning" id="suspects-count-badge">0</span>
+                </button>
+                <button class="nav-btn" data-tab="push">
+                    <span class="nav-icon">🚀</span> Live Push Agent
+                </button>
+                <button class="nav-btn" data-tab="settings">
+                    <span class="nav-icon">⚙️</span> Config & Credentials
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-outline btn-sm w-100 mb-2" id="btn-open-cred-modal">
+                    🔑 Change IP / Credentials
+                </button>
+                <div class="connection-status" id="fw-status-badge">
+                    <span class="status-dot disconnected" id="fw-status-dot"></span>
+                    <span class="status-text" id="fw-status-text">Target: 10.233.188.122</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="page-title">
+                    <h1 id="tab-title">Dashboard Overview</h1>
+                    <p id="tab-subtitle">Real-time status of Cisco FTD to Palo Alto PAN-OS migration</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="btn-header-creds">
+                        <span>🔑</span> Firewall Login (<span id="header-ip-display">10.233.188.122</span>)
+                    </button>
+                    <button class="btn btn-secondary" id="btn-parse-ftd">
+                        <span>🔄</span> Re-parse FTD Config
+                    </button>
+                    <button class="btn btn-primary" id="btn-quick-push">
+                        <span>⚡</span> Run Full Live Push
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB: Dashboard -->
+            <section class="tab-pane active" id="pane-dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">📄</span>
+                            <span class="stat-title">FTD Config Status</span>
+                        </div>
+                        <div class="stat-value" id="stat-ftd-status">Found (1.1 MB)</div>
+                        <div class="stat-desc">Cisco FTD running config ready</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">🗂️</span>
+                            <span class="stat-title">Migration Stages</span>
+                        </div>
+                        <div class="stat-value" id="stat-stages-count">9 Stages</div>
+                        <div class="stat-desc">14,337 CLI commands generated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">🛡️</span>
+                            <span class="stat-title">Security Policies</span>
+                        </div>
+                        <div class="stat-value" id="stat-policy-count">308 Rules</div>
+                        <div class="stat-desc" id="stat-suspects-desc">Checking for block rule actions...</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-icon">🌐</span>
+                            <span class="stat-title">Firewall Target</span>
+                        </div>
+                        <div class="stat-value" id="stat-fw-ip">10.233.188.122</div>
+                        <div class="stat-desc" id="stat-fw-user">User: admin · Port 22</div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <!-- Stages Overview Card -->
+                    <div class="card grid-col-2">
+                        <div class="card-header">
+                            <h3>Migration Stages Breakdown</h3>
+                            <button class="btn btn-sm btn-outline" id="btn-view-all-stages">View Details</button>
+                        </div>
+                        <div class="stages-list" id="dashboard-stages-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Fix Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Security Policy Action Inspector</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Cisco FTD exports Layer 7 rules with <code>permit</code> in LINA ACL format so Snort can inspect them. The agent inspector checks for rules named "Block" or "Malicious" that require explicit <code>action deny</code> on Palo Alto.</p>
+                            
+                            <div class="alert alert-info mt-3" id="suspects-alert">
+                                <strong>Action Audit:</strong> Click below to audit and convert all block rules to <code>action deny</code>.
+                            </div>
+
+                            <button class="btn btn-warning w-100 mt-3" id="btn-fix-deny">
+                                🛡️ Fix Block Rules to "action deny"
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Stages -->
+            <section class="tab-pane" id="pane-stages">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>PAN-OS Set Command Stages (01–09)</h3>
+                        <span class="badge badge-primary">9 Files</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table" id="stages-table">
+                                <thead>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Filename</th>
+                                        <th>Command Count</th>
+                                        <th>Size</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="card mt-4" id="stage-preview-card" style="display:none;">
+                    <div class="card-header">
+                        <h3 id="preview-filename">Stage Preview</h3>
+                        <button class="btn btn-sm btn-outline" id="btn-close-preview">Close</button>
+                    </div>
+                    <div class="card-body">
+                        <pre class="code-block" id="preview-code-block"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Security Policies -->
+            <section class="tab-pane" id="pane-policies">
+                <div class="card">
+                    <div class="card-header search-header">
+                        <h3>Security Rule Inspector</h3>
+                        <div class="search-controls">
+                            <input type="text" id="policy-search" class="form-control" placeholder="Search rules by name, zone, address...">
+                            <select id="policy-filter" class="form-control">
+                                <option value="all">All Rules</option>
+                                <option value="allow">Allow Only</option>
+                                <option value="deny">Deny Only</option>
+                                <option value="suspects">Block Suspects</option>
+                            </select>
+                            <button class="btn btn-warning" id="btn-fix-deny-policies">
+                                🛡️ Fix Suspect Block Rules
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table" id="policies-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rule Name</th>
+                                        <th>From Zone</th>
+                                        <th>To Zone</th>
+                                        <th>Source</th>
+                                        <th>Destination</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Live Push -->
+            <section class="tab-pane" id="pane-push">
+                <div class="push-layout">
+                    <div class="push-controls-panel card">
+                        <div class="card-header">
+                            <h3>Push Credentials & Target</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label for="push-target-ip">Firewall IP Address</label>
+                                <input type="text" id="push-target-ip" class="form-control" value="10.233.188.122" placeholder="e.g. 10.233.188.122">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="push-username">Username</label>
+                                <input type="text" id="push-username" class="form-control" value="admin" placeholder="admin">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="push-password">Password</label>
+                                <input type="password" id="push-password" class="form-control" placeholder="Enter SSH Password">
+                            </div>
+
+                            <hr class="divider">
+
+                            <h4 class="mb-2">Target Stages</h4>
+                            <div class="stage-checkboxes mb-3">
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="1" checked> 01 Security Zones</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="2" checked> 02 Network Interfaces</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="3" checked> 03 Service Objects</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="4" checked> 04 Service Groups</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="5" checked> 05 Address Objects</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="6" checked> 06 Address Groups</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="7" checked> 07 Static Routes</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="8" checked> 08 NAT Policies</label>
+                                <label class="checkbox-label"><input type="checkbox" name="push_stage" value="9" checked> 09 Security Policies</label>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="chunk-size-input">Command Chunk Size</label>
+                                <input type="number" id="chunk-size-input" class="form-control" value="50" min="5" max="200">
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label class="checkbox-label"><input type="checkbox" id="push-live-mode" checked> Live SSH Mode (Uncheck for Dry-Run)</label>
+                                <label class="checkbox-label"><input type="checkbox" id="push-auto-commit" checked> Execute Commit after Push</label>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg w-100" id="btn-start-push-task">
+                                🚀 Start Push Execution
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terminal Console -->
+                    <div class="terminal-panel card">
+                        <div class="terminal-header">
+                            <div class="terminal-title">
+                                <span class="terminal-icon">💻</span> Push Agent Live Console Output
+                            </div>
+                            <span class="badge badge-secondary" id="push-status-badge">Idle</span>
+                        </div>
+                        <div class="terminal-body" id="terminal-output">
+                            <span class="text-muted">Ready to launch task. Output logs will stream here in real time...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: Settings -->
+            <section class="tab-pane" id="pane-settings">
+                <div class="card max-w-600">
+                    <div class="card-header">
+                        <h3>Palo Alto Firewall Credentials</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="config-form">
+                            <div class="form-group mb-3">
+                                <label for="cfg-host">Firewall Host / IP</label>
+                                <input type="text" id="cfg-host" class="form-control" value="10.233.188.122">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="cfg-port">SSH Port</label>
+                                <input type="number" id="cfg-port" class="form-control" value="22">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="cfg-username">Username</label>
+                                <input type="text" id="cfg-username" class="form-control" value="admin">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="cfg-password">Password</label>
+                                <input type="password" id="cfg-password" class="form-control" placeholder="Enter password">
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-secondary" id="btn-test-ssh">
+                                    🔌 Test SSH Connection
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    💾 Save Credentials
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Credentials Modal -->
+    <div class="modal-overlay" id="credentials-modal" style="display:none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🔑 Palo Alto Firewall Login</h3>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-3">Enter the Palo Alto Firewall IP address and administrator credentials below to connect via SSH.</p>
+                <div class="form-group mb-3">
+                    <label for="modal-ip">Firewall IP Address</label>
+                    <input type="text" id="modal-ip" class="form-control" value="10.233.188.122" placeholder="e.g. 10.233.188.122">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="modal-username">Username</label>
+                    <input type="text" id="modal-username" class="form-control" value="admin" placeholder="admin">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="modal-password">Password</label>
+                    <input type="password" id="modal-password" class="form-control" placeholder="Enter SSH Password">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary" id="btn-modal-test">🔌 Test SSH</button>
+                <button class="btn btn-primary" id="btn-modal-save">💾 Save & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
